@@ -4,7 +4,7 @@ A machine learning system that predicts credit default probability for 891K exis
 
 **Industry:** Commercial Banking (Pakistan)  
 **Role:** Assistant Manager - Data Science | Designed and built the model end-to-end, from data integration to production scoring  
-**Tools:** Python, Scikit-learn, XGBoost, Pandas, SQL Server  
+**Tools:** Python, Scikit-learn, MLP Neural Network, Pandas, SQL Server  
 **Scored Population:** 891,136 existing-to-bank (ETB) customers  
 
 ---
