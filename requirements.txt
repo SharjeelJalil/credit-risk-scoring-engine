@@ -1,0 +1,13 @@
+pandas>=0.24.0
+numpy>=1.16.0
+scikit-learn>=0.20.0
+matplotlib>=3.0.0
+seaborn>=0.9.0
+imbalanced-learn>=0.4.0
+kmeans-smote>=0.1.0
+xgboost>=0.82
+sqlalchemy>=1.2.0
+pyodbc>=4.0.0
+joblib>=0.13.0
+statsmodels>=0.9.0
+jupyter>=1.0.0

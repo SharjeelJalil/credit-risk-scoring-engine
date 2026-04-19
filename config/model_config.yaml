@@ -1,0 +1,91 @@
+# Credit Risk Scoring Engine Configuration
+
+random_seed: 42
+
+# ── Default Definition ──
+default_definition:
+  threshold: 30  # days past due (30dpd)
+  source: credit_card_aging
+
+# ── MLP Neural Network (Production Model) ──
+mlp_model:
+  solver: adam
+  alpha: 1e-5
+  hidden_layer_sizes: [25, 5]
+  random_state: 125
+
+# ── Class Balancing ──
+oversampling:
+  method: kmeans_smote
+  kmeans_clusters: 100
+  smote_k_neighbors: 10
+  original_distribution:
+    non_defaulter: 97.5
+    defaulter: 2.5
+  target_distribution:
+    non_defaulter: 50.0
+    defaulter: 50.0
+
+# ── Normalization ──
+normalization:
+  method: min_max
+  range: [0, 1]
+
+# ── Feature Selection ──
+feature_selection:
+  method: pearson_correlation
+  p_value_threshold: 0.05
+  features_before_elimination: 80+
+  features_after_elimination: 35
+
+# ── Train/Test Split ──
+split:
+  test_size: 0.3
+  random_state: 0
+
+# ── Cross-Validation ──
+cross_validation:
+  folds: 10
+  metric: f1
+
+# ── Risk Categories (5-tier) ──
+risk_categories:
+  very_low: [0.0, 0.2]
+  low: [0.2, 0.4]
+  medium: [0.4, 0.6]
+  high: [0.6, 0.8]
+  very_high: [0.8, 1.0]
+
+# ── Risk Bands for Limit Determination (3-tier) ──
+risk_bands_for_limits:
+  low_medium: [0.0, 0.6]
+  high: [0.6, 0.8]
+  very_high: [0.8, 1.0]
+
+# ── Salary Band Edges (PKR) ──
+salary_bands:
+  edges: [0, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+  labels: ["<=20K", "20-30K", "30-40K", "40-50K", "50-60K", "60-70K", "70-80K", "80-90K", "90-100K", "100K+"]
+
+# ── Proxy Income ──
+proxy_income:
+  method: 6_month_avg_deposit_balance
+  source: customer_deposits_table
+
+# ── Model Comparison Results ──
+benchmark_algorithms:
+  - name: Logistic Regression
+    role: baseline
+  - name: Random Forest
+    n_estimators: 1000
+  - name: Gradient Boosting
+    role: sequential_ensemble
+  - name: XGBoost
+    learning_rate: 0.1
+    max_depth: 5
+    alpha: 10
+  - name: MLP Neural Network
+    hidden_layers: [25, 5]
+    role: production_model
+    accuracy: 0.73
+    auc: 0.73

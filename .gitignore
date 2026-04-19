@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Model artifacts
+*.sav
+*.joblib
+
+# Data (never commit bank data)
+data/
+*.csv
+*.txt
+*.xlsx
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+
+# OS
+.DS_Store
+Thumbs.db
